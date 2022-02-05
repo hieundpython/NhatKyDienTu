@@ -5,15 +5,15 @@
   (ngSubmit)="save()"
 >
   <abp-modal-header
-    [title]="'CreateNewUser' | localize"
+    [title]="'Tạo tài khoản'"
     (onCloseClick)="bsModalRef.hide()"
   ></abp-modal-header>
   <div class="modal-body">
     <tabset>
-      <tab [heading]="'UserDetails' | localize" class="pt-3 px-2">
+      <tab [heading]="'Thông tin chung'" class="pt-3 px-2">
         <div class="form-group row required">
           <label class="col-md-3 col-form-label" for="name">
-            {{ "Name" | localize }}
+            {{ "Tên" | localize }}
           </label>
           <div class="col-md-9">
             <input
@@ -35,7 +35,7 @@
         </div>
         <div class="form-group row required">
           <label class="col-md-3 col-form-label" for="surname">
-            {{ "Surname" | localize }}
+            {{ "Họ" | localize }}
           </label>
           <div class="col-md-9">
             <input
@@ -57,7 +57,7 @@
         </div>
         <div class="form-group row required">
           <label class="col-md-3 col-form-label" for="userName">
-            {{ "UserName" | localize }}
+            {{ "Tên đăng nhập" | localize }}
           </label>
           <div class="col-md-9">
             <input
@@ -80,7 +80,7 @@
         </div>
         <div class="form-group row required">
           <label class="col-md-3 col-form-label" for="password">
-            {{ "Password" | localize }}
+            {{ "Mật khẩu" | localize }}
           </label>
           <div class="col-md-9">
             <input
@@ -106,7 +106,7 @@
         </div>
         <div class="form-group row required">
           <label class="col-md-3 col-form-label" for="confirmPassword">
-            {{ "ConfirmPassword" | localize }}
+            {{ "Nhập lại mật khẩu" | localize }}
           </label>
           <div class="col-md-9">
             <input
@@ -131,7 +131,7 @@
         </div>
         <div class="form-group row required">
           <label class="col-md-3 col-form-label" for="emailAddress">
-            {{ "EmailAddress" | localize }}
+            {{ "Địa chỉ Email" | localize }}
           </label>
           <div class="col-md-9">
             <input
@@ -154,7 +154,7 @@
         </div>
         <div class="form-group row mb-0">
           <label class="col-md-3 col-form-label">
-            {{ "IsActive" | localize }}
+            {{ "Kích hoạt" | localize }}
           </label>
           <div class="col-md-9">
             <div class="custom-control custom-checkbox">
@@ -170,7 +170,7 @@
           </div>
         </div>
       </tab>
-      <tab [heading]="'UserRoles' | localize" class="pt-3 px-2">
+      <!-- <tab [heading]="'UserRoles' | localize" class="pt-3 px-2">
         <div class="form-group row mb-0">
           <ng-container *ngFor="let role of roles; let i = index">
             <div class="col-md-6">
@@ -188,6 +188,116 @@
               </div>
             </div>
           </ng-container>
+        </div>
+      </tab> -->
+      <tab [heading]="'Cấp bậc'" class="pt-3 px-2">
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="surname">
+            Cấp bậc
+          </label>
+          <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="surname"
+              id="surname"
+              required
+              maxlength="32"
+              [(ngModel)]="user.surname"
+              #surnameModel="ngModel"
+              #surnameEl
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="surname">
+            Chức vụ
+          </label>
+          <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="surname"
+              id="surname"
+              required
+              maxlength="32"
+              [(ngModel)]="user.surname"
+              #surnameModel="ngModel"
+              #surnameEl
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="surname">
+            Thân nhân
+          </label>
+          <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="surname"
+              id="surname"
+              required
+              maxlength="32"
+              [(ngModel)]="user.surname"
+              #surnameModel="ngModel"
+              #surnameEl
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="surname">
+            Lớp
+          </label>
+          <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="surname"
+              id="surname"
+              required
+              maxlength="32"
+              [(ngModel)]="user.surname"
+              #surnameModel="ngModel"
+              #surnameEl
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="surname">
+            Tiểu đoàn
+          </label>
+          <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="surname"
+              id="surname"
+              required
+              maxlength="32"
+              [(ngModel)]="user.surname"
+              #surnameModel="ngModel"
+              #surnameEl
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="surname">
+            Đại đội
+          </label>
+          <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="surname"
+              id="surname"
+              required
+              maxlength="32"
+              [(ngModel)]="user.surname"
+              #surnameModel="ngModel"
+              #surnameEl
+            />
+          </div>
         </div>
       </tab>
     </tabset>

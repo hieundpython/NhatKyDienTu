@@ -29,7 +29,7 @@ namespace NhatKyDienTu
             NhatKyDienTuLocalizationConfigurer.Configure(Configuration.Localization);
 
             // Enable this line to create a multi-tenant application.
-            Configuration.MultiTenancy.IsEnabled = NhatKyDienTuConsts.MultiTenancyEnabled;
+            Configuration.MultiTenancy.IsEnabled = false;
 
             // Configure roles
             AppRoleConfig.Configure(Configuration.Modules.Zero().RoleManagement);

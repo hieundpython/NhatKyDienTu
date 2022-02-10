@@ -9,15 +9,13 @@ namespace NhatKyDienTu.MainModel.ThongTinChung
 
         public CapBac CapBac { get; set; }
 
-        public string ChucVu { get; set; }
+        public ChucVu ChucVu { get; set; }
 
-        public string ThanNhan { get; set; }
+        public DaiDoi DaiDoi { get; set; }
 
-        public string Lop { get; set; }
+        public LuDoan LuDoan { get; set; }
 
-        public string TieuDoan { get; set; }
-
-        public string DaiDoi { get; set; }
+        public TieuDoan TieuDoan { get; set; }
 
         public User User { get; set; }
     }

@@ -2,25 +2,19 @@
 {
     public enum CapBac
     {
-        // Cap Binh
-        BinhNhi = 1,
-        BinhNhat,
-        //CapSi
-        HaSi,
-        TrungSi,
-        ThuongSi,
-        //Cap Uy
-        ChuanUy,
-        ThieuUy,
+        ThieuUy = 1,
         TrungUy,
+        ThuongUy,
         DaiUy,
-        //Cap ta
         ThieuTa,
         TrungTa,
+        ThuongTa,
         DaiTa,
-        //Cap tuong
-        ThieuTuong,
-        TrungTuong,
-        DaiTuong
+        ThieuUyCN,
+        TrungUyCN,
+        ThuongUyCN,
+        DaiUyCN,
+        ThieuTaCN,
+        TrungTaCN
     }
 }

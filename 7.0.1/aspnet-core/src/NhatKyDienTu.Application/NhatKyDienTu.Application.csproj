@@ -14,4 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NhatKyDienTu.Core\NhatKyDienTu.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MainApplication\" />
+  </ItemGroup>
 </Project>

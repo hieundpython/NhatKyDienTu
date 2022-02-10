@@ -2004,6 +2004,23 @@ export interface IAuthenticateResultModel {
     userId: number;
 }
 
+export enum CapBac {
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+    _5 = 5,
+    _6 = 6,
+    _7 = 7,
+    _8 = 8,
+    _9 = 9,
+    _10 = 10,
+    _11 = 11,
+    _12 = 12,
+    _13 = 13,
+    _14 = 14,
+}
+
 export class ChangePasswordDto implements IChangePasswordDto {
     currentPassword: string;
     newPassword: string;
@@ -2135,6 +2152,33 @@ export class ChangeUserLanguageDto implements IChangeUserLanguageDto {
 
 export interface IChangeUserLanguageDto {
     languageName: string;
+}
+
+export enum ChucVu {
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+    _5 = 5,
+    _6 = 6,
+    _7 = 7,
+    _8 = 8,
+    _9 = 9,
+    _10 = 10,
+    _11 = 11,
+    _12 = 12,
+    _13 = 13,
+    _14 = 14,
+    _15 = 15,
+    _16 = 16,
+    _17 = 17,
+    _18 = 18,
+    _19 = 19,
+    _20 = 20,
+    _21 = 21,
+    _22 = 22,
+    _23 = 23,
+    _24 = 24,
 }
 
 export class CreateRoleDto implements ICreateRoleDto {
@@ -2271,6 +2315,11 @@ export class CreateUserDto implements ICreateUserDto {
     isActive: boolean;
     roleNames: string[] | undefined;
     password: string;
+    capBac: CapBac;
+    chucVu: ChucVu;
+    daiDoi: DaiDoi;
+    luDoan: LuDoan;
+    tieuDoan: TieuDoan;
 
     constructor(data?: ICreateUserDto) {
         if (data) {
@@ -2294,6 +2343,11 @@ export class CreateUserDto implements ICreateUserDto {
                     this.roleNames.push(item);
             }
             this.password = _data["password"];
+            this.capBac = _data["capBac"];
+            this.chucVu = _data["chucVu"];
+            this.daiDoi = _data["daiDoi"];
+            this.luDoan = _data["luDoan"];
+            this.tieuDoan = _data["tieuDoan"];
         }
     }
 
@@ -2317,6 +2371,11 @@ export class CreateUserDto implements ICreateUserDto {
                 data["roleNames"].push(item);
         }
         data["password"] = this.password;
+        data["capBac"] = this.capBac;
+        data["chucVu"] = this.chucVu;
+        data["daiDoi"] = this.daiDoi;
+        data["luDoan"] = this.luDoan;
+        data["tieuDoan"] = this.tieuDoan;
         return data; 
     }
 
@@ -2336,6 +2395,23 @@ export interface ICreateUserDto {
     isActive: boolean;
     roleNames: string[] | undefined;
     password: string;
+    capBac: CapBac;
+    chucVu: ChucVu;
+    daiDoi: DaiDoi;
+    luDoan: LuDoan;
+    tieuDoan: TieuDoan;
+}
+
+export enum DaiDoi {
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+    _7 = 7,
+    _10 = 10,
+    _11 = 11,
+    _12 = 12,
+    _13 = 13,
 }
 
 export class ExternalAuthenticateModel implements IExternalAuthenticateModel {
@@ -2791,6 +2867,10 @@ export class IsTenantAvailableOutput implements IIsTenantAvailableOutput {
 export interface IIsTenantAvailableOutput {
     state: TenantAvailabilityState;
     tenantId: number | undefined;
+}
+
+export enum LuDoan {
+    _1 = 1,
 }
 
 export class PermissionDto implements IPermissionDto {
@@ -3573,6 +3653,13 @@ export interface ITenantLoginInfoDto {
     name: string | undefined;
 }
 
+export enum TieuDoan {
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+}
+
 export class UserDto implements IUserDto {
     id: number;
     userName: string;
@@ -3584,6 +3671,11 @@ export class UserDto implements IUserDto {
     lastLoginTime: moment.Moment | undefined;
     creationTime: moment.Moment;
     roleNames: string[] | undefined;
+    capBac: CapBac;
+    chucVu: ChucVu;
+    daiDoi: DaiDoi;
+    luDoan: LuDoan;
+    tieuDoan: TieuDoan;
 
     constructor(data?: IUserDto) {
         if (data) {
@@ -3610,6 +3702,11 @@ export class UserDto implements IUserDto {
                 for (let item of _data["roleNames"])
                     this.roleNames.push(item);
             }
+            this.capBac = _data["capBac"];
+            this.chucVu = _data["chucVu"];
+            this.daiDoi = _data["daiDoi"];
+            this.luDoan = _data["luDoan"];
+            this.tieuDoan = _data["tieuDoan"];
         }
     }
 
@@ -3636,6 +3733,11 @@ export class UserDto implements IUserDto {
             for (let item of this.roleNames)
                 data["roleNames"].push(item);
         }
+        data["capBac"] = this.capBac;
+        data["chucVu"] = this.chucVu;
+        data["daiDoi"] = this.daiDoi;
+        data["luDoan"] = this.luDoan;
+        data["tieuDoan"] = this.tieuDoan;
         return data; 
     }
 
@@ -3658,6 +3760,11 @@ export interface IUserDto {
     lastLoginTime: moment.Moment | undefined;
     creationTime: moment.Moment;
     roleNames: string[] | undefined;
+    capBac: CapBac;
+    chucVu: ChucVu;
+    daiDoi: DaiDoi;
+    luDoan: LuDoan;
+    tieuDoan: TieuDoan;
 }
 
 export class UserDtoPagedResultDto implements IUserDtoPagedResultDto {

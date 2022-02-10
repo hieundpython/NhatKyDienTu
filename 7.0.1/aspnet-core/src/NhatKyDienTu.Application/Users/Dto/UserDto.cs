@@ -4,6 +4,7 @@ using Abp.Application.Services.Dto;
 using Abp.Authorization.Users;
 using Abp.AutoMapper;
 using NhatKyDienTu.Authorization.Users;
+using NhatKyDienTu.MainModel.ThongTinChung;
 
 namespace NhatKyDienTu.Users.Dto
 {
@@ -36,5 +37,16 @@ namespace NhatKyDienTu.Users.Dto
         public DateTime CreationTime { get; set; }
 
         public string[] RoleNames { get; set; }
+
+        // Thong Tin Chung
+        public CapBac? CapBac { get; set; }
+
+        public ChucVu? ChucVu { get; set; }
+
+        public DaiDoi? DaiDoi { get; set; }
+
+        public LuDoan? LuDoan { get; set; }
+
+        public TieuDoan? TieuDoan { get; set; }
     }
 }

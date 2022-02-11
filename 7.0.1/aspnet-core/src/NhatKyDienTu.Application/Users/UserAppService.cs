@@ -22,18 +22,21 @@ using NhatKyDienTu.Roles.Dto;
 using NhatKyDienTu.Users.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NhatKyDienTu.MainModel.ThongTinChung;
 
 namespace NhatKyDienTu.Users
 {
     [AbpAuthorize(PermissionNames.Pages_Users)]
     public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUserResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
+        private readonly IRepository<User, long> repository;
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
         private readonly IRepository<Role> _roleRepository;
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IAbpSession _abpSession;
         private readonly LogInManager _logInManager;
+        private readonly IRepository<ThongTinChung> _thongtinChungRepo;
 
         public UserAppService(
             IRepository<User, long> repository,
@@ -42,15 +45,18 @@ namespace NhatKyDienTu.Users
             IRepository<Role> roleRepository,
             IPasswordHasher<User> passwordHasher,
             IAbpSession abpSession,
-            LogInManager logInManager)
+            LogInManager logInManager,
+            IRepository<ThongTinChung> thongtinChungRepo)
             : base(repository)
         {
+            this.repository = repository;
             _userManager = userManager;
             _roleManager = roleManager;
             _roleRepository = roleRepository;
             _passwordHasher = passwordHasher;
             _abpSession = abpSession;
             _logInManager = logInManager;
+            _thongtinChungRepo = thongtinChungRepo;
         }
 
         public override async Task<UserDto> CreateAsync(CreateUserDto input)
@@ -71,8 +77,20 @@ namespace NhatKyDienTu.Users
                 CheckErrors(await _userManager.SetRolesAsync(user, input.RoleNames));
             }
 
-            CurrentUnitOfWork.SaveChanges();
+            var thongTinChung = new ThongTinChung
+            {
+                TenantId = AbpSession.TenantId,
+                CapBac = input.CapBac,
+                ChucVu = input.ChucVu,
+                DaiDoi = input.DaiDoi,
+                LuDoan = input.LuDoan,
+                TieuDoan = input.TieuDoan,
+                UserId = user.Id,
+            };
 
+            await _thongtinChungRepo.InsertAsync(thongTinChung);
+
+            CurrentUnitOfWork.SaveChanges();
             return MapToEntityDto(user);
         }
 
@@ -91,6 +109,19 @@ namespace NhatKyDienTu.Users
                 CheckErrors(await _userManager.SetRolesAsync(user, input.RoleNames));
             }
 
+            var thongTinChung = await _thongtinChungRepo.FirstOrDefaultAsync(e => e.UserId == input.Id);
+
+            if (thongTinChung != null)
+            {
+                thongTinChung.CapBac = input.CapBac;
+                thongTinChung.ChucVu = input.ChucVu;
+                thongTinChung.DaiDoi = input.DaiDoi;
+                thongTinChung.LuDoan = input.LuDoan;
+                thongTinChung.TieuDoan = input.TieuDoan;
+
+                await _thongtinChungRepo.UpdateAsync(thongTinChung);
+            }
+
             return await GetAsync(input);
         }
 
@@ -98,6 +129,9 @@ namespace NhatKyDienTu.Users
         {
             var user = await _userManager.GetUserByIdAsync(input.Id);
             await _userManager.DeleteAsync(user);
+
+            var thongTinChung = await _thongtinChungRepo.FirstOrDefaultAsync(e => e.UserId == input.Id);
+            await _thongtinChungRepo.DeleteAsync(thongTinChung);
         }
 
         [AbpAuthorize(PermissionNames.Pages_Users_Activation)]
@@ -196,7 +230,7 @@ namespace NhatKyDienTu.Users
             {
                 throw new Exception("There is no current user!");
             }
-            
+
             if (await _userManager.CheckPasswordAsync(user, input.CurrentPassword))
             {
                 CheckErrors(await _userManager.ChangePasswordAsync(user, input.NewPassword));
@@ -218,19 +252,19 @@ namespace NhatKyDienTu.Users
             {
                 throw new UserFriendlyException("Please log in before attempting to reset password.");
             }
-            
+
             var currentUser = await _userManager.GetUserByIdAsync(_abpSession.GetUserId());
             var loginAsync = await _logInManager.LoginAsync(currentUser.UserName, input.AdminPassword, shouldLockout: false);
             if (loginAsync.Result != AbpLoginResultType.Success)
             {
                 throw new UserFriendlyException("Your 'Admin Password' did not match the one on record.  Please try again.");
             }
-            
+
             if (currentUser.IsDeleted || !currentUser.IsActive)
             {
                 return false;
             }
-            
+
             var roles = await _userManager.GetRolesAsync(currentUser);
             if (!roles.Contains(StaticRoleNames.Tenants.Admin))
             {

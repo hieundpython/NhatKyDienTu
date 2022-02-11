@@ -1,13 +1,5 @@
-<form
-  class="form-horizontal"
-  autocomplete="off"
-  #createUserModal="ngForm"
-  (ngSubmit)="save()"
->
-  <abp-modal-header
-    [title]="'Tạo tài khoản'"
-    (onCloseClick)="bsModalRef.hide()"
-  ></abp-modal-header>
+<form class="form-horizontal" autocomplete="off" #createUserModal="ngForm" (ngSubmit)="save()">
+  <abp-modal-header [title]="'Tạo tài khoản'" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
   <div class="modal-body">
     <tabset>
       <tab [heading]="'Thông tin chung'" class="pt-3 px-2">
@@ -16,21 +8,9 @@
             {{ "Tên" | localize }}
           </label>
           <div class="col-md-9">
-            <input
-              type="text"
-              class="form-control"
-              name="name"
-              id="name"
-              required
-              maxlength="32"
-              [(ngModel)]="user.name"
-              #nameModel="ngModel"
-              #nameEl
-            />
-            <abp-validation-summary
-              [control]="nameModel"
-              [controlEl]="nameEl"
-            ></abp-validation-summary>
+            <input type="text" class="form-control" name="name" id="name" required maxlength="32"
+              [(ngModel)]="user.name" #nameModel="ngModel" #nameEl />
+            <abp-validation-summary [control]="nameModel" [controlEl]="nameEl"></abp-validation-summary>
           </div>
         </div>
         <div class="form-group row required">
@@ -38,21 +18,9 @@
             {{ "Họ" | localize }}
           </label>
           <div class="col-md-9">
-            <input
-              type="text"
-              class="form-control"
-              name="surname"
-              id="surname"
-              required
-              maxlength="32"
-              [(ngModel)]="user.surname"
-              #surnameModel="ngModel"
-              #surnameEl
-            />
-            <abp-validation-summary
-              [control]="surnameModel"
-              [controlEl]="surnameEl"
-            ></abp-validation-summary>
+            <input type="text" class="form-control" name="surname" id="surname" required maxlength="32"
+              [(ngModel)]="user.surname" #surnameModel="ngModel" #surnameEl />
+            <abp-validation-summary [control]="surnameModel" [controlEl]="surnameEl"></abp-validation-summary>
           </div>
         </div>
         <div class="form-group row required">
@@ -60,22 +28,9 @@
             {{ "Tên đăng nhập" | localize }}
           </label>
           <div class="col-md-9">
-            <input
-              type="text"
-              class="form-control"
-              name="userName"
-              id="userName"
-              required
-              minlength="2"
-              maxlength="32"
-              [(ngModel)]="user.userName"
-              #userNameModel="ngModel"
-              #userNameEl
-            />
-            <abp-validation-summary
-              [control]="userNameModel"
-              [controlEl]="userNameEl"
-            ></abp-validation-summary>
+            <input type="text" class="form-control" name="userName" id="userName" required minlength="2" maxlength="32"
+              [(ngModel)]="user.userName" #userNameModel="ngModel" #userNameEl />
+            <abp-validation-summary [control]="userNameModel" [controlEl]="userNameEl"></abp-validation-summary>
           </div>
         </div>
         <div class="form-group row required">
@@ -83,25 +38,12 @@
             {{ "Mật khẩu" | localize }}
           </label>
           <div class="col-md-9">
-            <input
-              type="password"
-              class="form-control"
-              name="password"
-              id="password"
-              required
-              maxlength="32"
-              validateEqual="confirmPassword"
-              reverse="true"
+            <input type="password" class="form-control" name="password" id="password" required maxlength="32"
+              validateEqual="confirmPassword" reverse="true"
               pattern="(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)[0-9a-zA-Z!@#$%^&*()]*$"
-              [(ngModel)]="user.password"
-              #passwordModel="ngModel"
-              #passwordEl
-            />
-            <abp-validation-summary
-              [control]="passwordModel"
-              [controlEl]="passwordEl"
-              [customValidationErrors]="passwordValidationErrors"
-            ></abp-validation-summary>
+              [(ngModel)]="user.password" #passwordModel="ngModel" #passwordEl />
+            <abp-validation-summary [control]="passwordModel" [controlEl]="passwordEl"
+              [customValidationErrors]="passwordValidationErrors"></abp-validation-summary>
           </div>
         </div>
         <div class="form-group row required">
@@ -109,24 +51,11 @@
             {{ "Nhập lại mật khẩu" | localize }}
           </label>
           <div class="col-md-9">
-            <input
-              type="password"
-              class="form-control"
-              name="confirmPassword"
-              id="confirmPassword"
-              required
-              maxlength="32"
-              validateEqual="password"
-              reverse="false"
-              ngModel
-              #confirmPasswordModel="ngModel"
-              #confirmPasswordEl
-            />
-            <abp-validation-summary
-              [control]="confirmPasswordModel"
-              [controlEl]="confirmPasswordEl"
-              [customValidationErrors]="confirmPasswordValidationErrors"
-            ></abp-validation-summary>
+            <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" required
+              maxlength="32" validateEqual="password" reverse="false" ngModel #confirmPasswordModel="ngModel"
+              #confirmPasswordEl />
+            <abp-validation-summary [control]="confirmPasswordModel" [controlEl]="confirmPasswordEl"
+              [customValidationErrors]="confirmPasswordValidationErrors"></abp-validation-summary>
           </div>
         </div>
         <div class="form-group row required">
@@ -134,22 +63,10 @@
             {{ "Địa chỉ Email" | localize }}
           </label>
           <div class="col-md-9">
-            <input
-              type="email"
-              class="form-control"
-              name="emailAddress"
-              id="emailAddress"
-              required
-              maxlength="256"
-              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
-              [(ngModel)]="user.emailAddress"
-              #emailAddressModel="ngModel"
-              #emailAddressEl
-            />
-            <abp-validation-summary
-              [control]="emailAddressModel"
-              [controlEl]="emailAddressEl"
-            ></abp-validation-summary>
+            <input type="email" class="form-control" name="emailAddress" id="emailAddress" required maxlength="256"
+              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$" [(ngModel)]="user.emailAddress"
+              #emailAddressModel="ngModel" #emailAddressEl />
+            <abp-validation-summary [control]="emailAddressModel" [controlEl]="emailAddressEl"></abp-validation-summary>
           </div>
         </div>
         <div class="form-group row mb-0">
@@ -158,13 +75,8 @@
           </label>
           <div class="col-md-9">
             <div class="custom-control custom-checkbox">
-              <input
-                type="checkbox"
-                class="custom-control-input"
-                name="isActive"
-                id="isActive"
-                [(ngModel)]="user.isActive"
-              />
+              <input type="checkbox" class="custom-control-input" name="isActive" id="isActive"
+                [(ngModel)]="user.isActive" />
               <label class="custom-control-label mt-2" for="isActive"></label>
             </div>
           </div>
@@ -196,89 +108,26 @@
             Cấp bậc
           </label>
           <div class="col-md-9">
-            <input
-              type="text"
-              class="form-control"
-              name="surname"
-              id="surname"
-              required
-              maxlength="32"
-              [(ngModel)]="user.surname"
-              #surnameModel="ngModel"
-              #surnameEl
-            />
+            <p-dropdown [style]="{'width':'100%'}" [options]="listCapBac" name="CapBac" [(ngModel)]="user.capBac"
+              placeholder="Lựa chọn cấp bậc" optionLabel="label" optionValue="value" [showClear]="true"></p-dropdown>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="surname">
-            Chức vụ
+            Lữ Đoàn
           </label>
           <div class="col-md-9">
-            <input
-              type="text"
-              class="form-control"
-              name="surname"
-              id="surname"
-              required
-              maxlength="32"
-              [(ngModel)]="user.surname"
-              #surnameModel="ngModel"
-              #surnameEl
-            />
+            <p-dropdown [style]="{'width':'100%'}" [options]="listLuDoan" name="LuDoan" [(ngModel)]="user.luDoan"
+              placeholder="Lựa chọn lữ đoàn" optionLabel="label" optionValue="value" [showClear]="true"></p-dropdown>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="surname">
-            Thân nhân
+            Tiểu Đoàn
           </label>
           <div class="col-md-9">
-            <input
-              type="text"
-              class="form-control"
-              name="surname"
-              id="surname"
-              required
-              maxlength="32"
-              [(ngModel)]="user.surname"
-              #surnameModel="ngModel"
-              #surnameEl
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="surname">
-            Lớp
-          </label>
-          <div class="col-md-9">
-            <input
-              type="text"
-              class="form-control"
-              name="surname"
-              id="surname"
-              required
-              maxlength="32"
-              [(ngModel)]="user.surname"
-              #surnameModel="ngModel"
-              #surnameEl
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="surname">
-            Tiểu đoàn
-          </label>
-          <div class="col-md-9">
-            <input
-              type="text"
-              class="form-control"
-              name="surname"
-              id="surname"
-              required
-              maxlength="32"
-              [(ngModel)]="user.surname"
-              #surnameModel="ngModel"
-              #surnameEl
-            />
+            <p-dropdown [style]="{'width':'100%'}" [options]="listTieuDoan" name="LuDoan" [(ngModel)]="user.tieuDoan"
+              placeholder="Lựa chọn tiểu đoàn" optionLabel="label" optionValue="value" [showClear]="true"></p-dropdown>
           </div>
         </div>
         <div class="form-group row">
@@ -286,25 +135,22 @@
             Đại đội
           </label>
           <div class="col-md-9">
-            <input
-              type="text"
-              class="form-control"
-              name="surname"
-              id="surname"
-              required
-              maxlength="32"
-              [(ngModel)]="user.surname"
-              #surnameModel="ngModel"
-              #surnameEl
-            />
+            <p-dropdown [style]="{'width':'100%'}" [options]="listDaiDoi" name="LuDoan" [(ngModel)]="user.daiDoi"
+              placeholder="Lựa chọn đại đội" optionLabel="label" optionValue="value" [showClear]="true"></p-dropdown>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="surname">
+            Chức vụ
+          </label>
+          <div class="col-md-9">
+            <p-dropdown [style]="{'width':'100%'}" [options]="listChucVu" name="Chucvu" [(ngModel)]="user.chucVu"
+              placeholder="Lựa chọn chức vụ" optionLabel="label" optionValue="value" [showClear]="true"></p-dropdown>
           </div>
         </div>
       </tab>
     </tabset>
   </div>
-  <abp-modal-footer
-    [cancelDisabled]="saving"
-    [saveDisabled]="!createUserModal.form.valid || saving"
-    (onCancelClick)="bsModalRef.hide()"
-  ></abp-modal-footer>
+  <abp-modal-footer [cancelDisabled]="saving" [saveDisabled]="!createUserModal.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"></abp-modal-footer>
 </form>

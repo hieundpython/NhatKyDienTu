@@ -59,6 +59,58 @@ namespace NhatKyDienTu.Users
             _thongtinChungRepo = thongtinChungRepo;
         }
 
+        public override async Task<PagedResultDto<UserDto>> GetAllAsync(PagedUserResultRequestDto input)
+        {
+
+            var query = repository.GetAll()
+                    .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.UserName.Contains(input.Keyword) || x.Surname.Contains(input.Keyword)
+                    || x.Name.Contains(input.Keyword));
+                ;
+
+            var count = query.Count();
+
+            var list = await query
+                .PageBy(input.SkipCount, input.MaxResultCount)
+                .ToListAsync();
+
+            var items = ObjectMapper.Map<List<UserDto>>(list);
+
+            foreach (var item in items)
+            {
+                var thongTinChung =await _thongtinChungRepo.FirstOrDefaultAsync(e => e.UserId == item.Id);
+
+                if (thongTinChung != null)
+                {
+                    item.CapBac = thongTinChung.CapBac;
+                    item.ChucVu = thongTinChung.ChucVu;
+                    item.DaiDoi = thongTinChung.DaiDoi;
+                    item.LuDoan = thongTinChung.LuDoan;
+                    item.TieuDoan = thongTinChung.TieuDoan;
+                }
+            }
+
+            return new PagedResultDto<UserDto>(count, items);
+        }
+
+        public override async Task<UserDto> GetAsync(EntityDto<long> input)
+        {
+            var user = await repository.FirstOrDefaultAsync(input.Id);
+
+            var result = ObjectMapper.Map<UserDto>(user);
+
+            var thongTinChung = await _thongtinChungRepo.FirstOrDefaultAsync(e => e.UserId == user.Id);
+            if (thongTinChung != null && result != null)
+            {
+                result.CapBac = thongTinChung.CapBac;
+                result.ChucVu = thongTinChung.ChucVu;
+                result.DaiDoi = thongTinChung.DaiDoi;
+                result.LuDoan = thongTinChung.LuDoan;
+                result.TieuDoan = thongTinChung.TieuDoan;
+            }
+
+            return result;
+        }
+
         public override async Task<UserDto> CreateAsync(CreateUserDto input)
         {
             CheckCreatePermission();

@@ -1,17 +1,81 @@
 <div [@routerTransition]>
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-6">
-                    <h1>"Thong ke"</h1>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="content px-2">
+    <section class="content px-2 pt-2">
         <div class="container-fluid">
             <div class="card">
-                <div>Thong ke</div>
+                <div>Công cụ thống kê: Cảm xúc</div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        Chọn phạm vi
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="surname">
+                                Tiểu Đoàn
+                            </label>
+                            <div class="col-md-9">
+                                <p-dropdown [style]="{'width':'100%'}" [options]="listTieuDoan" name="TieuDoan"
+                                    placeholder="Lựa chọn tiểu đoàn" optionLabel="label" optionValue="value"
+                                    [showClear]="true"></p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="surname">
+                                Đại đội
+                            </label>
+                            <div class="col-md-9">
+                                <p-dropdown [style]="{'width':'100%'}" [options]="listDaiDoi" name="DaiDou"
+                                    placeholder="Lựa chọn đại đội" optionLabel="label" optionValue="value"
+                                    [showClear]="true"></p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        Chọn khoảng thời gian
+                    </div>
+                    <div class="col-md-4">
+                        <p-calendar [(ngModel)]="startDate" [maxDate]="endDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="startDate"></p-calendar>
+                    </div>
+                    <div class="col-md-4">
+                        <p-calendar [(ngModel)]="endDate" [minDate]="startDate" dateFormat="dd/mm/yy" [showIcon]="true" inputId="endDate"></p-calendar>
+                    </div>
+                </div>
+
+                <div class="mt-2 mb-2">
+                    <p-button label="Thống kê"></p-button>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm">
+                        <div>Theo cảm xúc</div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                Tích cực
+                            </div>
+                            <div class="col-md-6">
+                                Tiêu cực
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                List Tích cực
+                            </div>
+                            <div class="col-md-6">
+                                List Tiêu cực
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div>Theo Hashtag</div>
+                        <div>Chọn Hashtag</div>
+                        <div>Thống kê Hashtag</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

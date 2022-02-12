@@ -9,7 +9,7 @@ namespace NhatKyDienTu.MainApplication
     {
         Task<NhatKyDto> AddNhatKy(CreateNhatKyDto input);
 
-        Task<List<NhatKyDto>> GetAllNhatKy(InputNhatKyDto input);
+        Task<ThongKeDto> GetThongKeNhatKy(InputNhatKyDto input);
 
         Task<NhatKyDto> GetNhatKy(long id);
 

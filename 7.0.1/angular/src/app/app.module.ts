@@ -47,7 +47,8 @@ import { DropdownModule } from "primeng/dropdown";
 import { CheckboxModule } from "primeng/checkbox";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { ChipsModule } from "primeng/chips";
-import {ButtonModule} from 'primeng/button';
+import { ButtonModule } from "primeng/button";
+import { CalendarModule } from "primeng/calendar";
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import {ButtonModule} from 'primeng/button';
     CheckboxModule,
     InputTextareaModule,
     ChipsModule,
-    ButtonModule
+    ButtonModule,
+    CalendarModule,
   ],
   providers: [],
   entryComponents: [

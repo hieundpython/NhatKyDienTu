@@ -205,6 +205,261 @@ export class ConfigurationServiceProxy {
 }
 
 @Injectable()
+export class NhatKyServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    addNhatKy(body: CreateNhatKyDto | undefined): Observable<NhatKyDto> {
+        let url_ = this.baseUrl + "/api/services/app/NhatKy/AddNhatKy";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddNhatKy(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddNhatKy(<any>response_);
+                } catch (e) {
+                    return <Observable<NhatKyDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<NhatKyDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAddNhatKy(response: HttpResponseBase): Observable<NhatKyDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = NhatKyDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<NhatKyDto>(<any>null);
+    }
+
+    /**
+     * @param startTime (optional) 
+     * @param endTime (optional) 
+     * @return Success
+     */
+    getAllNhatKy(startTime: moment.Moment | undefined, endTime: moment.Moment | undefined): Observable<NhatKyDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/NhatKy/GetAllNhatKy?";
+        if (startTime === null)
+            throw new Error("The parameter 'startTime' cannot be null.");
+        else if (startTime !== undefined)
+            url_ += "StartTime=" + encodeURIComponent(startTime ? "" + startTime.toJSON() : "") + "&";
+        if (endTime === null)
+            throw new Error("The parameter 'endTime' cannot be null.");
+        else if (endTime !== undefined)
+            url_ += "EndTime=" + encodeURIComponent(endTime ? "" + endTime.toJSON() : "") + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllNhatKy(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllNhatKy(<any>response_);
+                } catch (e) {
+                    return <Observable<NhatKyDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<NhatKyDto[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAllNhatKy(response: HttpResponseBase): Observable<NhatKyDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(NhatKyDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<NhatKyDto[]>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getNhatKy(id: number | undefined): Observable<NhatKyDto> {
+        let url_ = this.baseUrl + "/api/services/app/NhatKy/GetNhatKy?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetNhatKy(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetNhatKy(<any>response_);
+                } catch (e) {
+                    return <Observable<NhatKyDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<NhatKyDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetNhatKy(response: HttpResponseBase): Observable<NhatKyDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = NhatKyDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<NhatKyDto>(<any>null);
+    }
+
+    /**
+     * @param userId (optional) 
+     * @return Success
+     */
+    getNhatKyByUserId(userId: number | undefined): Observable<NhatKyDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/NhatKy/GetNhatKyByUserId?";
+        if (userId === null)
+            throw new Error("The parameter 'userId' cannot be null.");
+        else if (userId !== undefined)
+            url_ += "userId=" + encodeURIComponent("" + userId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetNhatKyByUserId(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetNhatKyByUserId(<any>response_);
+                } catch (e) {
+                    return <Observable<NhatKyDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<NhatKyDto[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetNhatKyByUserId(response: HttpResponseBase): Observable<NhatKyDto[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200.push(NhatKyDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<NhatKyDto[]>(<any>null);
+    }
+}
+
+@Injectable()
 export class RoleServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -2181,6 +2436,61 @@ export enum ChucVu {
     _24 = 24,
 }
 
+export class CreateNhatKyDto implements ICreateNhatKyDto {
+    camXuc: string | undefined;
+    hashTag: string | undefined;
+    note: string | undefined;
+    userId: number;
+
+    constructor(data?: ICreateNhatKyDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.camXuc = _data["camXuc"];
+            this.hashTag = _data["hashTag"];
+            this.note = _data["note"];
+            this.userId = _data["userId"];
+        }
+    }
+
+    static fromJS(data: any): CreateNhatKyDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateNhatKyDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["camXuc"] = this.camXuc;
+        data["hashTag"] = this.hashTag;
+        data["note"] = this.note;
+        data["userId"] = this.userId;
+        return data; 
+    }
+
+    clone(): CreateNhatKyDto {
+        const json = this.toJSON();
+        let result = new CreateNhatKyDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreateNhatKyDto {
+    camXuc: string | undefined;
+    hashTag: string | undefined;
+    note: string | undefined;
+    userId: number;
+}
+
 export class CreateRoleDto implements ICreateRoleDto {
     name: string;
     displayName: string;
@@ -2871,6 +3181,69 @@ export interface IIsTenantAvailableOutput {
 
 export enum LuDoan {
     _1 = 1,
+}
+
+export class NhatKyDto implements INhatKyDto {
+    id: number;
+    userId: number;
+    camXuc: string | undefined;
+    hashTag: string | undefined;
+    note: string | undefined;
+    creationTime: moment.Moment;
+
+    constructor(data?: INhatKyDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.userId = _data["userId"];
+            this.camXuc = _data["camXuc"];
+            this.hashTag = _data["hashTag"];
+            this.note = _data["note"];
+            this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): NhatKyDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new NhatKyDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["userId"] = this.userId;
+        data["camXuc"] = this.camXuc;
+        data["hashTag"] = this.hashTag;
+        data["note"] = this.note;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        return data; 
+    }
+
+    clone(): NhatKyDto {
+        const json = this.toJSON();
+        let result = new NhatKyDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface INhatKyDto {
+    id: number;
+    userId: number;
+    camXuc: string | undefined;
+    hashTag: string | undefined;
+    note: string | undefined;
+    creationTime: moment.Moment;
 }
 
 export class PermissionDto implements IPermissionDto {

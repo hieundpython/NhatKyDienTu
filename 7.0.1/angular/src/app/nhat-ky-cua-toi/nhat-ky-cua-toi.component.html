@@ -1,0 +1,104 @@
+<div [@routerTransition]>
+    <!-- <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <h1>"Nhat Ky cua toi"</h1>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <section class="content px-2">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="row">
+                    <div class="col-sm">
+                        <div>Cảm xúc hiện tại của bạn thế nào?</div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <h5>Tích cực</h5>
+                                <div class="col-sm">
+                                    <p-checkbox name="group1" value="Thích thú" [(ngModel)]="selectedCities"
+                                        inputId="ny"></p-checkbox>
+                                    <label for="ny">Thích thú</label>
+                                </div>
+                                <div class="field-checkbox">
+                                    <p-checkbox name="group1" value="Vui sướng" [(ngModel)]="selectedCities"
+                                        inputId="sf"></p-checkbox>
+                                    <label for="sf">Vui sướng</label>
+                                </div>
+                                <div class="field-checkbox">
+                                    <p-checkbox name="group1" value="Phấn khởi" [(ngModel)]="selectedCities"
+                                        inputId="la"></p-checkbox>
+                                    <label for="la">Phấn khởi</label>
+                                </div>
+                                <div class="field-checkbox">
+                                    <p-checkbox name="group1" value="Hạnh phúc" [(ngModel)]="selectedCities"
+                                        inputId="ch">
+                                    </p-checkbox>
+                                    <label for="ch">Hạnh phúc</label>
+                                </div>
+                                <div class="field-checkbox">
+                                    <p-checkbox name="group1" value="Lạc quan" [(ngModel)]="selectedCities"
+                                        inputId="ch">
+                                    </p-checkbox>
+                                    <label for="ch">Lạc quan</label>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <h5>Tiêu cực</h5>
+                                <div class="field-checkbox">
+                                    <p-checkbox name="group1" value="Mệt mỏi" [(ngModel)]="selectedCities" inputId="ny">
+                                    </p-checkbox>
+                                    <label for="ny">Mệt mỏi</label>
+                                </div>
+                                <div class="field-checkbox">
+                                    <p-checkbox name="group1" value="Lo lắng" [(ngModel)]="selectedCities" inputId="sf">
+                                    </p-checkbox>
+                                    <label for="sf">Lo lắng</label>
+                                </div>
+                                <div class="field-checkbox">
+                                    <p-checkbox name="group1" value="Buồn bã" [(ngModel)]="selectedCities" inputId="la">
+                                    </p-checkbox>
+                                    <label for="la">Buồn bã</label>
+                                </div>
+                                <div class="field-checkbox">
+                                    <p-checkbox name="group1" value="Chán nản" [(ngModel)]="selectedCities"
+                                        inputId="ch">
+                                    </p-checkbox>
+                                    <label for="ch">Chán nản</label>
+                                </div>
+                                <div class="field-checkbox">
+                                    <p-checkbox name="group1" value="Thất vọng" [(ngModel)]="selectedCities"
+                                        inputId="ch">
+                                    </p-checkbox>
+                                    <label for="ch">Thất vọng</label>
+                                </div>
+                                <div class="field-checkbox">
+                                    <p-checkbox name="group1" value="Căng thẳng" [(ngModel)]="selectedCities"
+                                        inputId="ch">
+                                    </p-checkbox>
+                                    <label for="ch">Căng thẳng</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <textarea [style]="{'width':'100%'}" rows="5" cols="30" pInputTextarea></textarea>
+                        </div>
+
+                        <div class="row">
+                            <p-chips [style]="{'width':'100%'}" [(ngModel)]="values1"></p-chips>
+                        </div>
+                        <p-button label="Cập nhật" (click)="updateNote()"></p-button>
+
+
+                    </div>
+                    <div class="col-sm">
+                        One of three columns
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

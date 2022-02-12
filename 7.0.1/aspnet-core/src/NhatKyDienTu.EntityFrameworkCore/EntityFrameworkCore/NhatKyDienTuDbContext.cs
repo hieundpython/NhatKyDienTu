@@ -4,6 +4,7 @@ using NhatKyDienTu.Authorization.Roles;
 using NhatKyDienTu.Authorization.Users;
 using NhatKyDienTu.MultiTenancy;
 using NhatKyDienTu.MainModel.ThongTinChung;
+using NhatKyDienTu.MainModel.NhatKy;
 
 namespace NhatKyDienTu.EntityFrameworkCore
 {
@@ -12,6 +13,7 @@ namespace NhatKyDienTu.EntityFrameworkCore
         /* Define a DbSet for each entity of the application */
         public DbSet<ThongTinChung> ThongTinChungs { get; set; }
 
+        public DbSet<NhatKy> NhatKys { get; set; }
 
         public NhatKyDienTuDbContext(DbContextOptions<NhatKyDienTuDbContext> options)
             : base(options)

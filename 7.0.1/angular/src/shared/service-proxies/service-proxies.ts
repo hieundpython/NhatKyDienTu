@@ -3672,10 +3672,15 @@ export class UserDto implements IUserDto {
     creationTime: moment.Moment;
     roleNames: string[] | undefined;
     capBac: CapBac;
+    capBacStr: string | undefined;
     chucVu: ChucVu;
+    chucVuStr: string | undefined;
     daiDoi: DaiDoi;
+    daiDoiStr: string | undefined;
     luDoan: LuDoan;
+    luDoanStr: string | undefined;
     tieuDoan: TieuDoan;
+    tieuDoanStr: string | undefined;
 
     constructor(data?: IUserDto) {
         if (data) {
@@ -3703,10 +3708,15 @@ export class UserDto implements IUserDto {
                     this.roleNames.push(item);
             }
             this.capBac = _data["capBac"];
+            this.capBacStr = _data["capBacStr"];
             this.chucVu = _data["chucVu"];
+            this.chucVuStr = _data["chucVuStr"];
             this.daiDoi = _data["daiDoi"];
+            this.daiDoiStr = _data["daiDoiStr"];
             this.luDoan = _data["luDoan"];
+            this.luDoanStr = _data["luDoanStr"];
             this.tieuDoan = _data["tieuDoan"];
+            this.tieuDoanStr = _data["tieuDoanStr"];
         }
     }
 
@@ -3734,10 +3744,15 @@ export class UserDto implements IUserDto {
                 data["roleNames"].push(item);
         }
         data["capBac"] = this.capBac;
+        data["capBacStr"] = this.capBacStr;
         data["chucVu"] = this.chucVu;
+        data["chucVuStr"] = this.chucVuStr;
         data["daiDoi"] = this.daiDoi;
+        data["daiDoiStr"] = this.daiDoiStr;
         data["luDoan"] = this.luDoan;
+        data["luDoanStr"] = this.luDoanStr;
         data["tieuDoan"] = this.tieuDoan;
+        data["tieuDoanStr"] = this.tieuDoanStr;
         return data; 
     }
 
@@ -3761,10 +3776,15 @@ export interface IUserDto {
     creationTime: moment.Moment;
     roleNames: string[] | undefined;
     capBac: CapBac;
+    capBacStr: string | undefined;
     chucVu: ChucVu;
+    chucVuStr: string | undefined;
     daiDoi: DaiDoi;
+    daiDoiStr: string | undefined;
     luDoan: LuDoan;
+    luDoanStr: string | undefined;
     tieuDoan: TieuDoan;
+    tieuDoanStr: string | undefined;
 }
 
 export class UserDtoPagedResultDto implements IUserDtoPagedResultDto {

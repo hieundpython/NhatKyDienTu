@@ -86,6 +86,12 @@ namespace NhatKyDienTu.Users
                     item.DaiDoi = thongTinChung.DaiDoi;
                     item.LuDoan = thongTinChung.LuDoan;
                     item.TieuDoan = thongTinChung.TieuDoan;
+
+                    item.CapBacStr = HienThiThongTin.GetCapBac(item.CapBac);
+                    item.ChucVuStr = HienThiThongTin.GetChucVu(item.ChucVu);
+                    item.DaiDoiStr = HienThiThongTin.GetDaiDoi(item.DaiDoi);
+                    item.LuDoanStr = HienThiThongTin.GetLuDoan(item.LuDoan);
+                    item.TieuDoanStr = HienThiThongTin.GetTieuDoan(item.TieuDoan);
                 }
             }
 
@@ -106,6 +112,12 @@ namespace NhatKyDienTu.Users
                 result.DaiDoi = thongTinChung.DaiDoi;
                 result.LuDoan = thongTinChung.LuDoan;
                 result.TieuDoan = thongTinChung.TieuDoan;
+
+                result.CapBacStr = HienThiThongTin.GetCapBac(result.CapBac);
+                result.ChucVuStr = HienThiThongTin.GetChucVu(result.ChucVu);
+                result.DaiDoiStr = HienThiThongTin.GetDaiDoi(result.DaiDoi);
+                result.LuDoanStr = HienThiThongTin.GetLuDoan(result.LuDoan);
+                result.TieuDoanStr = HienThiThongTin.GetTieuDoan(result.TieuDoan);
             }
 
             return result;

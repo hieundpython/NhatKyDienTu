@@ -3,22 +3,35 @@ import {
   Injector,
   OnInit,
   EventEmitter,
-  Output
-} from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
-import { forEach as _forEach, includes as _includes, map as _map } from 'lodash-es';
-import { AppComponentBase } from '@shared/app-component-base';
+  Output,
+} from "@angular/core";
+import { BsModalRef } from "ngx-bootstrap/modal";
+import {
+  forEach as _forEach,
+  includes as _includes,
+  map as _map,
+} from "lodash-es";
+import { AppComponentBase } from "@shared/app-component-base";
 import {
   UserServiceProxy,
   UserDto,
-  RoleDto
-} from '@shared/service-proxies/service-proxies';
+  RoleDto,
+} from "@shared/service-proxies/service-proxies";
+import {
+  listCapBacArr,
+  listChucVuArr,
+  listDaiDoiArr,
+  listLuDoanArr,
+  listTieuDoanArr,
+} from "@shared/AppEnums";
 
 @Component({
-  templateUrl: './edit-user-dialog.component.html'
+  templateUrl: "./edit-user-dialog.component.html",
 })
-export class EditUserDialogComponent extends AppComponentBase
-  implements OnInit {
+export class EditUserDialogComponent
+  extends AppComponentBase
+  implements OnInit
+{
   saving = false;
   user = new UserDto();
   roles: RoleDto[] = [];
@@ -26,6 +39,12 @@ export class EditUserDialogComponent extends AppComponentBase
   id: number;
 
   @Output() onSave = new EventEmitter<any>();
+
+  listCapBac = listCapBacArr;
+  listLuDoan = listLuDoanArr;
+  listTieuDoan = listTieuDoanArr;
+  listDaiDoi = listDaiDoiArr;
+  listChucVu = listChucVuArr;
 
   constructor(
     injector: Injector,
@@ -79,7 +98,7 @@ export class EditUserDialogComponent extends AppComponentBase
 
     this._userService.update(this.user).subscribe(
       () => {
-        this.notify.info(this.l('SavedSuccessfully'));
+        this.notify.info(this.l("SavedSuccessfully"));
         this.bsModalRef.hide();
         this.onSave.emit();
       },

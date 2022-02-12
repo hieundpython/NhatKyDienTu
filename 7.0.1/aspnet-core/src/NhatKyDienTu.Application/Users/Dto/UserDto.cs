@@ -41,12 +41,22 @@ namespace NhatKyDienTu.Users.Dto
         // Thong Tin Chung
         public CapBac? CapBac { get; set; }
 
+        public string CapBacStr { get; set; }
+
         public ChucVu? ChucVu { get; set; }
+
+        public string ChucVuStr { get; set; }
 
         public DaiDoi? DaiDoi { get; set; }
 
+        public string DaiDoiStr { get; set; }
+
         public LuDoan? LuDoan { get; set; }
 
+        public string LuDoanStr { get; set; }
+
         public TieuDoan? TieuDoan { get; set; }
+
+        public string TieuDoanStr { get; set; }
     }
 }

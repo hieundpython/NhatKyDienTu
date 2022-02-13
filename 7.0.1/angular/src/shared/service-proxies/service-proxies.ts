@@ -274,10 +274,12 @@ export class NhatKyServiceProxy {
     /**
      * @param startTime (optional) 
      * @param endTime (optional) 
+     * @param tieuDoan (optional) 
+     * @param daiDoi (optional) 
      * @return Success
      */
-    getAllNhatKy(startTime: moment.Moment | undefined, endTime: moment.Moment | undefined): Observable<NhatKyDto[]> {
-        let url_ = this.baseUrl + "/api/services/app/NhatKy/GetAllNhatKy?";
+    getThongKeNhatKy(startTime: moment.Moment | undefined, endTime: moment.Moment | undefined, tieuDoan: TieuDoan | undefined, daiDoi: DaiDoi | undefined): Observable<ThongKeDto> {
+        let url_ = this.baseUrl + "/api/services/app/NhatKy/GetThongKeNhatKy?";
         if (startTime === null)
             throw new Error("The parameter 'startTime' cannot be null.");
         else if (startTime !== undefined)
@@ -286,6 +288,14 @@ export class NhatKyServiceProxy {
             throw new Error("The parameter 'endTime' cannot be null.");
         else if (endTime !== undefined)
             url_ += "EndTime=" + encodeURIComponent(endTime ? "" + endTime.toJSON() : "") + "&";
+        if (tieuDoan === null)
+            throw new Error("The parameter 'tieuDoan' cannot be null.");
+        else if (tieuDoan !== undefined)
+            url_ += "TieuDoan=" + encodeURIComponent("" + tieuDoan) + "&";
+        if (daiDoi === null)
+            throw new Error("The parameter 'daiDoi' cannot be null.");
+        else if (daiDoi !== undefined)
+            url_ += "DaiDoi=" + encodeURIComponent("" + daiDoi) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -297,20 +307,20 @@ export class NhatKyServiceProxy {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetAllNhatKy(response_);
+            return this.processGetThongKeNhatKy(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processGetAllNhatKy(<any>response_);
+                    return this.processGetThongKeNhatKy(<any>response_);
                 } catch (e) {
-                    return <Observable<NhatKyDto[]>><any>_observableThrow(e);
+                    return <Observable<ThongKeDto>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<NhatKyDto[]>><any>_observableThrow(response_);
+                return <Observable<ThongKeDto>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAllNhatKy(response: HttpResponseBase): Observable<NhatKyDto[]> {
+    protected processGetThongKeNhatKy(response: HttpResponseBase): Observable<ThongKeDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -321,14 +331,7 @@ export class NhatKyServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (Array.isArray(resultData200)) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200.push(NhatKyDto.fromJS(item));
-            }
-            else {
-                result200 = <any>null;
-            }
+            result200 = ThongKeDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -336,7 +339,7 @@ export class NhatKyServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<NhatKyDto[]>(<any>null);
+        return _observableOf<ThongKeDto>(<any>null);
     }
 
     /**
@@ -2259,6 +2262,53 @@ export interface IAuthenticateResultModel {
     userId: number;
 }
 
+export class CamXuc implements ICamXuc {
+    tenCamXuc: string | undefined;
+    soLuong: number;
+
+    constructor(data?: ICamXuc) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.tenCamXuc = _data["tenCamXuc"];
+            this.soLuong = _data["soLuong"];
+        }
+    }
+
+    static fromJS(data: any): CamXuc {
+        data = typeof data === 'object' ? data : {};
+        let result = new CamXuc();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["tenCamXuc"] = this.tenCamXuc;
+        data["soLuong"] = this.soLuong;
+        return data; 
+    }
+
+    clone(): CamXuc {
+        const json = this.toJSON();
+        let result = new CamXuc();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICamXuc {
+    tenCamXuc: string | undefined;
+    soLuong: number;
+}
+
 export enum CapBac {
     _1 = 1,
     _2 = 2,
@@ -3044,6 +3094,61 @@ export interface IGetRoleForEditOutput {
     role: RoleEditDto;
     permissions: FlatPermissionDto[] | undefined;
     grantedPermissionNames: string[] | undefined;
+}
+
+export class HashTag implements IHashTag {
+    tenHashTag: string | undefined;
+    listCamXuc: CamXuc[] | undefined;
+
+    constructor(data?: IHashTag) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.tenHashTag = _data["tenHashTag"];
+            if (Array.isArray(_data["listCamXuc"])) {
+                this.listCamXuc = [] as any;
+                for (let item of _data["listCamXuc"])
+                    this.listCamXuc.push(CamXuc.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): HashTag {
+        data = typeof data === 'object' ? data : {};
+        let result = new HashTag();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["tenHashTag"] = this.tenHashTag;
+        if (Array.isArray(this.listCamXuc)) {
+            data["listCamXuc"] = [];
+            for (let item of this.listCamXuc)
+                data["listCamXuc"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): HashTag {
+        const json = this.toJSON();
+        let result = new HashTag();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IHashTag {
+    tenHashTag: string | undefined;
+    listCamXuc: CamXuc[] | undefined;
 }
 
 export class Int64EntityDto implements IInt64EntityDto {
@@ -4024,6 +4129,69 @@ export interface ITenantLoginInfoDto {
     id: number;
     tenancyName: string | undefined;
     name: string | undefined;
+}
+
+export class ThongKeDto implements IThongKeDto {
+    camXucs: CamXuc[] | undefined;
+    hashTags: HashTag[] | undefined;
+
+    constructor(data?: IThongKeDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["camXucs"])) {
+                this.camXucs = [] as any;
+                for (let item of _data["camXucs"])
+                    this.camXucs.push(CamXuc.fromJS(item));
+            }
+            if (Array.isArray(_data["hashTags"])) {
+                this.hashTags = [] as any;
+                for (let item of _data["hashTags"])
+                    this.hashTags.push(HashTag.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ThongKeDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ThongKeDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.camXucs)) {
+            data["camXucs"] = [];
+            for (let item of this.camXucs)
+                data["camXucs"].push(item.toJSON());
+        }
+        if (Array.isArray(this.hashTags)) {
+            data["hashTags"] = [];
+            for (let item of this.hashTags)
+                data["hashTags"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): ThongKeDto {
+        const json = this.toJSON();
+        let result = new ThongKeDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IThongKeDto {
+    camXucs: CamXuc[] | undefined;
+    hashTags: HashTag[] | undefined;
 }
 
 export enum TieuDoan {

@@ -235,3 +235,21 @@ export const listChucVuArr = [
     value: ChucVu._24,
   },
 ];
+
+export const tichCucArr = [
+  "Thích thú",
+  "Vui sướng",
+  "Phấn khởi",
+  "Hạnh phúc",
+  "Lạc quan",
+];
+export const tieuCucArr = [
+  "Mệt mỏi",
+  "Lo lắng",
+  "Buồn bã",
+  "Chán nản",
+  "Thất vọng",
+  "Căng thẳng",
+  "Bị áp lực",
+  "Chưa đoàn kết",
+];

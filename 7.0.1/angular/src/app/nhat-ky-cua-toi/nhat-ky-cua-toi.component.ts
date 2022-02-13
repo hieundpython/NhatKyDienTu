@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit, ViewEncapsulation } from "@angular/core";
 import { appModuleAnimation } from "@shared/animations/routerTransition";
 import { AppComponentBase } from "@shared/app-component-base";
+import { tichCucArr, tieuCucArr } from "@shared/AppEnums";
 import {
   CreateNhatKyDto,
   NhatKyDto,
@@ -23,17 +24,8 @@ export class NhatKyCuaToiComponent extends AppComponentBase implements OnInit {
 
   listNhatKy: NhatKyDto[] = [];
 
-  tichCuc = ["Thích thú", "Vui sướng", "Phấn khởi", "Hạnh phúc", "Lạc quan"];
-  tieuCuc = [
-    "Mệt mỏi",
-    "Lo lắng",
-    "Buồn bã",
-    "Chán nản",
-    "Thất vọng",
-    "Căng thẳng",
-    "Bị áp lực",
-    "Chưa đoàn kết",
-  ];
+  tichCuc = tichCucArr;
+  tieuCuc = tieuCucArr;
 
   constructor(
     injector: Injector,

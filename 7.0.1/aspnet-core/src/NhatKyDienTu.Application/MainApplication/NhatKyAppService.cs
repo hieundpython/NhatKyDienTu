@@ -47,6 +47,11 @@ namespace NhatKyDienTu.MainApplication
                     .ToListAsync();
 
                 listUserId = listUserIdMatch;
+
+                if (listUserId.Count == 0)
+                {
+                    return new ThongKeDto();
+                }
             }
 
             var query = _nhatKyRepo

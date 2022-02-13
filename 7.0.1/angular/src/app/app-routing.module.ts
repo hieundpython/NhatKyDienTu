@@ -29,8 +29,16 @@ import { NhatKyCuaToiComponent } from "./nhat-ky-cua-toi/nhat-ky-cua-toi.compone
             data: { permission: "Pages.Users" },
             canActivate: [AppRouteGuard],
           },
-          { path: "thong-ke", component: ThongKeComponent },
-          { path: "nhat-ky-cua-toi", component: NhatKyCuaToiComponent },
+          {
+            path: "thong-ke",
+            component: ThongKeComponent,
+            canActivate: [AppRouteGuard],
+          },
+          {
+            path: "nhat-ky-cua-toi",
+            component: NhatKyCuaToiComponent,
+            canActivate: [AppRouteGuard],
+          },
           {
             path: "roles",
             component: RolesComponent,
@@ -52,7 +60,7 @@ import { NhatKyCuaToiComponent } from "./nhat-ky-cua-toi/nhat-ky-cua-toi.compone
             path: "update-password",
             component: ChangePasswordComponent,
             canActivate: [AppRouteGuard],
-          }
+          },
         ],
       },
     ]),

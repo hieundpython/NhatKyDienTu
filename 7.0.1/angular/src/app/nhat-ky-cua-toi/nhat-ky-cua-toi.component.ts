@@ -11,13 +11,13 @@ import { AppSessionService } from "@shared/session/app-session.service";
 
 @Component({
   templateUrl: "./nhat-ky-cua-toi.component.html",
-  styleUrls: ['./nhat-ky-cua-toi.component.less'],
+  styleUrls: ["./nhat-ky-cua-toi.component.less"],
   animations: [appModuleAnimation()],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class NhatKyCuaToiComponent extends AppComponentBase implements OnInit {
   selectedCamxuc: string[] = [];
-  hashtags: string[];
+  hashtags: string[] = [];
   notes: string;
 
   nhatKy = new CreateNhatKyDto();
@@ -52,14 +52,23 @@ export class NhatKyCuaToiComponent extends AppComponentBase implements OnInit {
 
     this._nhatKyService.addNhatKy(this.nhatKy).subscribe(
       () => {
-        this.notify.info(this.l("SavedSuccessfully"));
+        this.notify.info(this.l("Cập nhật thành công"));
         this.getNhatKyByUser();
+        this.resetForm();
       },
       () => {
-        this.notify.info(this.l("Saved Error"));
+        this.notify.info(this.l("Cập nhật thất bại"));
       }
     );
   };
+
+  resetForm() {
+    this.selectedCamxuc = [];
+    this.hashtags = [];
+    this.notes = "";
+
+    this.nhatKy = new CreateNhatKyDto();
+  }
 
   getNhatKyByUser() {
     this._nhatKyService

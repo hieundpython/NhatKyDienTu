@@ -46,7 +46,7 @@
                         <div class="card-nhat-ky">
                             <div class="card mt-3 ml-4 mb-2 mr-2" style="width: 95%;" *ngFor="let item of listNhatKy;">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ item.creationTime | date:'medium' }} </h5>
+                                    <h5 class="card-title">{{ item.creationTime | date:'dd/MM/YYYY hh:mm:ss' }} </h5>
                                     <p class="card-text">Cảm xúc: {{item.camXuc}}</p>
                                     <p class="card-text">Lý do: {{item.note}}</p>
                                     <p class="card-text">HashTag: {{item.hashTag}}</p>

@@ -72,7 +72,9 @@ namespace NhatKyDienTu.MainApplication
                 }).ToList();
 
             // Thống kê theo hashtag
-            var hashtagsDB = list.Select(e => new
+            var hashtagsDB = list
+                .Where(e => e.HashTag != null)
+                .Select(e => new
             {
                 Tags = e.HashTag.Split(", ").ToList(),
                 CamXuc = e.CamXuc
@@ -126,7 +128,7 @@ namespace NhatKyDienTu.MainApplication
         {
             var query = _nhatKyRepo.GetAll()
                 .Where(e => e.UserId == userId)
-                .OrderBy(e => e.CreationTime);
+                .OrderByDescending(e => e.CreationTime);
 
             var list = await query.ToListAsync();
             var items = ObjectMapper.Map<List<NhatKyDto>>(list);

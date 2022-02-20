@@ -50,8 +50,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <ul class="list-group" *ngFor="let item of tichCuc;">
-                                    <li class="list-group-item">
-                                        <div class="row">
+                                    <li class="list-group-item mb-1">
+                                        <div class="row" style="color: blueviolet;">
                                             <div class="col-md-9"><i class="fas fa-thumbs-up"></i> {{item}}</div>
                                             <div class="col-md-3">
                                                 <span
@@ -63,12 +63,12 @@
                             </div>
                             <div class="col-md-6">
                                 <ul class="list-group" *ngFor="let item of tieuCuc;">
-                                    <li class="list-group-item">
-                                        <div class="row">
+                                    <li class="list-group-item mb-1">
+                                        <div class="row" style="color: indianred;">
                                             <div class="col-md-9"><i class="fas fa-thumbs-down"></i> {{item}}</div>
                                             <div class="col-md-3">
                                                 <span
-                                                    class="badge badge-pill badge-primary">{{getSoluongThongKe(item)}}</span>
+                                                    class="badge badge-pill badge-warning">{{getSoluongThongKe(item)}}</span>
                                             </div>
                                         </div>
                                     </li>
@@ -81,7 +81,7 @@
                         <div>
                             <div *ngIf="thongKeDto.hashTags">
                                 <ul class="list-group" *ngFor="let item of thongKeDto.hashTags;">
-                                    <li class="list-group-item">
+                                    <li class="list-group-item mb-1">
                                         <button style="height: 25px;" pButton pRipple type="button" label="Primary"
                                             class="p-button-text"
                                             (click)="showListCamXucTheoTag(item)">{{item.tenHashTag}}</button>
@@ -93,14 +93,19 @@
                         <div *ngIf="listCamXucTheoTag.length > 0">
                             <div class="title-cam-xuc mb-2 mt-2 text-center">Thống kê Hashtag</div>
                             <ul class="list-group" *ngFor="let item of listCamXucTheoTag;">
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-md-9" *ngIf="tichCuc.includes(item.tenCamXuc)"><i
+                                <li class="list-group-item mb-1">
+                                    <div class="row" style="color: blueviolet;" *ngIf="tichCuc.includes(item.tenCamXuc)">
+                                        <div class="col-md-9"><i
                                                 class="fas fa-thumbs-up"></i> {{item.tenCamXuc}}</div>
-                                        <div class="col-md-9" *ngIf="tieuCuc.includes(item.tenCamXuc)"><i
-                                                class="fas fa-thumbs-down"></i> {{item.tenCamXuc}}</div>
                                         <div class="col-md-3">
                                             <span class="badge badge-pill badge-primary">{{item.soLuong}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="color: indianred;" *ngIf="tieuCuc.includes(item.tenCamXuc)">
+                                        <div class="col-md-9"><i
+                                                class="fas fa-thumbs-down"></i> {{item.tenCamXuc}}</div>
+                                        <div class="col-md-3">
+                                            <span class="badge badge-pill badge-warning">{{item.soLuong}}</span>
                                         </div>
                                     </div>
                                 </li>

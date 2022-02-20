@@ -6,11 +6,11 @@
                     <div class="col-sm nhat-ky-list">
                         <div class="card-nhat-ky">
                             <div class="mt-2 ml-2 mr-2">
-                                <div class="header">Cảm xúc hiện tại của bạn thế nào?</div>
+                                <div class="header text-center ">Cảm xúc hiện tại của bạn thế nào?</div>
                                 <div class="row mt-2 mb-2">
                                     <div class="col-sm">
-                                        <h5>Tích cực</h5>
-                                        <div class="col-sm mb-2" *ngFor="let item of tichCuc;">
+                                        <div class="camxuc-title text-center">Tích cực</div>
+                                        <div class="col-sm mb-2 mt-2" *ngFor="let item of tichCuc;" style="color: blueviolet;">
                                             <p-checkbox [name]="item" [value]="item" [(ngModel)]="selectedCamxuc"
                                                 [inputId]="item" (onChange)="changeCamXuc($event)">
                                             </p-checkbox>
@@ -18,8 +18,8 @@
                                         </div>
                                     </div>
                                     <div class="col-sm">
-                                        <h5>Tiêu cực</h5>
-                                        <div class="col-sm mb-2" *ngFor="let item of tieuCuc;">
+                                        <div class="camxuc-title text-center">Tiêu cực</div>
+                                        <div class="col-sm mb-2 mt-2" *ngFor="let item of tieuCuc;" style="color: indianred">
                                             <p-checkbox [name]="item" [value]="item" [(ngModel)]="selectedCamxuc"
                                                 [inputId]="item" (onChange)="changeCamXuc($event)">
                                             </p-checkbox>
@@ -44,12 +44,12 @@
                     </div>
                     <div class="col-sm nhat-ky-list">
                         <div class="card-nhat-ky">
-                            <div class="card mt-3 ml-4 mb-2 mr-2" style="width: 95%;" *ngFor="let item of listNhatKy;">
+                            <div class="card mt-3 ml-4 mb-2 mr-2 card-nhat-ky-contain" style="width: 95%;" *ngFor="let item of listNhatKy;">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ item.creationTime | date:'dd/MM/YYYY hh:mm:ss' }} </h5>
-                                    <p class="card-text">Cảm xúc: {{item.camXuc}}</p>
-                                    <p class="card-text">Lý do: {{item.note}}</p>
-                                    <p class="card-text">HashTag: {{item.hashTag}}</p>
+                                    <h5 class="card-title mb-3"><i class="far fa-calendar"></i> {{ item.creationTime | date:'dd/MM/YYYY    hh:mm:ss' }} </h5>
+                                    <p class="card-text"><span class="font-weight-bold">Cảm xúc:</span> {{item.camXuc}}</p>
+                                    <p class="card-text"><span class="font-weight-bold">Lý do:</span> {{item.note}}</p>
+                                    <p class="card-text"><span class="font-weight-bold">HashTag: </span> <span class="badge badge-success">{{item.hashTag}}</span></p>
                                 </div>
                             </div>
                         </div>

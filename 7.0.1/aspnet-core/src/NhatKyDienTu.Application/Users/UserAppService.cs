@@ -63,7 +63,7 @@ namespace NhatKyDienTu.Users
             var query = repository.GetAll()
                     .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.UserName.Contains(input.Keyword) || x.Surname.Contains(input.Keyword)
                     || x.Name.Contains(input.Keyword));
-                ;
+            ;
 
             var count = query.Count();
 
@@ -75,7 +75,7 @@ namespace NhatKyDienTu.Users
 
             foreach (var item in items)
             {
-                var thongTinChung =await _thongtinChungRepo.FirstOrDefaultAsync(e => e.UserId == item.Id);
+                var thongTinChung = await _thongtinChungRepo.FirstOrDefaultAsync(e => e.UserId == item.Id);
 
                 if (thongTinChung != null)
                 {
@@ -182,6 +182,21 @@ namespace NhatKyDienTu.Users
                 thongTinChung.TieuDoan = input.TieuDoan;
 
                 await _thongtinChungRepo.UpdateAsync(thongTinChung);
+            }
+            else
+            {
+                var thongTinChungNew = new ThongTinChung
+                {
+                    TenantId = AbpSession.TenantId,
+                    CapBac = input.CapBac,
+                    ChucVu = input.ChucVu,
+                    DaiDoi = input.DaiDoi,
+                    LuDoan = input.LuDoan,
+                    TieuDoan = input.TieuDoan,
+                    UserId = user.Id,
+                };
+
+                await _thongtinChungRepo.InsertAsync(thongTinChungNew);
             }
 
             return await GetAsync(input);

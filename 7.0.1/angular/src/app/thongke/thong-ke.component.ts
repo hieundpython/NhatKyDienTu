@@ -38,6 +38,7 @@ export class ThongKeComponent extends AppComponentBase {
   }
 
   getThongKeNhatKy() {
+    this.listCamXucTheoTag = [];
     this._nhatKyService
       .getThongKeNhatKy(
         this.startDate ? moment(this.startDate) : undefined,
